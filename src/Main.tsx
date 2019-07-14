@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import Animated from "react-native-reanimated";
+
 // core snoopy
-// import Snoopy from "rn-snoopy";
-// import filter from "rn-snoopy/stream/filter";
-// import EventEmitter from "react-native/Libraries/vendor/emitter/EventEmitter";
+import Snoopy from "rn-snoopy";
+import filter from "rn-snoopy/stream/filter";
+import EventEmitter from "react-native/Libraries/vendor/emitter/EventEmitter";
 
-// const emitter = new EventEmitter();
+const emitter = new EventEmitter();
 
-// const events = Snoopy.stream(emitter);
-// filter({ method: "updateView" }, true)(events).subscribe();
+const events = Snoopy.stream(emitter);
+filter({ method: "updateView" }, true)(events).subscribe();
 
 HEADER_MAX_HEIGHT = 120;
 HEADER_MIN_HEIGHT = 70;
@@ -64,6 +65,7 @@ class Main extends Component {
     });
   }
 
+  // thread blocking
   componentDidMount() {
     setInterval(() => {
       for (let i = 0; i < 1000; i++) {
@@ -141,7 +143,9 @@ class Main extends Component {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1
+    flex: 1,
+    // android device fix
+    shadowColor: "white"
   },
   headerText: {
     color: "white",
